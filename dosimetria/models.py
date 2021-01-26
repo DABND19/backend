@@ -3,18 +3,24 @@ import main.models as main
 
 
 class Client(models.Model):
-    """ИДК клиент"""
+    """
+    ИДК клиент
+    """
     organisation = models.ForeignKey(
         to=main.Organisation,
         on_delete=models.CASCADE
     )
 
-    DTU_num = models.PositiveSmallIntegerField()
-    DTL_num = models.PositiveSmallIntegerField()
+    is_work_in_progress = models.BooleanField(default=True)
+
+    DTU_num = models.PositiveSmallIntegerField(default=0)
+    DTL_num = models.PositiveSmallIntegerField(default=0)
 
 
 class Address(models.Model):
-    """Адрес ИДК клиента"""
+    """
+    Адрес ИДК клиента
+    """
     organisation = models.ForeignKey(
         to=Client,
         on_delete=models.CASCADE
@@ -26,14 +32,19 @@ class Address(models.Model):
 
 
 class Contract(models.Model):
-    """Контактная информация ИДК клиента"""
+    """
+    Контактная информация ИДК клиента
+    """
     organisation = models.ForeignKey(to=Client, on_delete=models.PROTECT)
+    number = models.CharField(max_length=32)
     begin = models.DateField()
     end = models.DateField()
 
 
 class Quarter(models.Model):
-    """Квартальная отчетность"""
+    """
+    Квартальная отчетность
+    """
     year = models.PositiveSmallIntegerField()
     number = models.PositiveSmallIntegerField()
 
@@ -44,7 +55,9 @@ class Quarter(models.Model):
 
 
 class Protocol(models.Model):
-    """Протокол проведенных работ с ИДК клиентом"""
+    """
+    Протокол проведенных работ с ИДК клиентом
+    """
     organisation = models.ForeignKey(
         to=Client,
         on_delete=models.PROTECT
@@ -58,7 +71,9 @@ class Protocol(models.Model):
 
 
 class Document(models.Model):
-    """Документ, переданный клиенту в определенный квартал"""
+    """
+    Документ, переданный клиенту в определенный квартал
+    """
     organisation = models.ForeignKey(
         to=Client,
         on_delete=models.PROTECT
@@ -73,17 +88,24 @@ class Document(models.Model):
 
 
 class Invoice(models.Model):
-    """Счет, выставленный ИДК клиенту в определенный квартал"""
+    """
+    Счет, выставленный ИДК клиенту в определенный квартал
+    """
     organisation = models.ForeignKey(
         to=Client,
         on_delete=models.PROTECT
     )
     quarter = models.ForeignKey(
         to=Quarter,
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
+        related_name='issued_at'
     )
 
     number = models.CharField(max_length=32)
     total = models.PositiveIntegerField()
-    paid_at = models.DateField(null=True)
-    is_paid = models.BooleanField(default=False)
+    returned_at = models.ForeignKey(
+        to=Quarter, 
+        on_delete=models.PROTECT,
+        related_name='returned_at'
+    )
+    is_returned = models.BooleanField(default=False)

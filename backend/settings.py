@@ -26,7 +26,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'main.apps.MainConfig',
+    'dosimetria.apps.DosimetriaConfig',
 ]
 
 MIDDLEWARE = [

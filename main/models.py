@@ -3,7 +3,9 @@ from django.core.validators import RegexValidator
 
 
 class Organisation(models.Model):
-    """Здесь храним все организации"""
+    """
+    Здесь храним все организации
+    """
     name = models.CharField(
         max_length=256,
         unique=True
@@ -22,13 +24,16 @@ class Organisation(models.Model):
 
 
 class Address(models.Model):
-    """Здесь храним все адреса"""
-    owner = models.ForeignKey(to=Organisation, on_delete=models.CASCADE)
-    detail = models.CharField(max_length=256)
+    """
+    Здесь храним все адреса
+    """
+    full = models.CharField(max_length=256)
 
 
 class LegalAddress(models.Model):
-    """Здесь храним юридический адрес"""
+    """
+    Здесь храним юридический адрес
+    """
     organisation = models.ForeignKey(
         to=Organisation,
         on_delete=models.CASCADE
@@ -40,18 +45,21 @@ class LegalAddress(models.Model):
 
 
 class Contact(models.Model):
-    """Здесь храним все контакты"""
-    organisation = models.ForeignKey(
-        to=Organisation,
-        on_delete=models.CASCADE
-    )
-    name = models.CharField(max_length=128, unique=True)
+    """
+    Здесь храним все контакты
+    """
+    name = models.CharField(max_length=64)
+    surname = models.CharField(max_length=64)
+    patronymic = models.CharField(max_length=64)
+
     phone = models.CharField(max_length=16, null=True)
     email = models.EmailField(null=True)
 
 
 class LegalContact(models.Model):
-    """Здесь храним контакты доверенных лиц организации"""
+    """
+    Здесь храним контакты доверенных лиц организации
+    """
     organisation = models.ForeignKey(
         to=Organisation,
         on_delete=models.CASCADE
