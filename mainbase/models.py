@@ -10,7 +10,7 @@ class Counterparty(models.Model):
     )
     taxpayer_id = models.CharField(
         verbose_name='ИНН',
-        max_length=12, 
+        max_length=12,
         unique=True,
         validators=[
             RegexValidator(
@@ -19,6 +19,9 @@ class Counterparty(models.Model):
             )
         ]
     )
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = 'Контрагент'
@@ -45,6 +48,9 @@ class Contact(models.Model):
     email = models.EmailField(
         verbose_name='Электронная почта',
     )
+
+    def fullname(self):
+        return f'{self.surname} {self.name} {self.patronymic}'
 
 
 class LegalContact(Contact):
@@ -85,8 +91,11 @@ class Address(models.Model):
         verbose_name='Дом/строение'
     )
 
-    def __str__(self):
+    def full(self):
         return f'{self.postcode}, {self.region}, {self.area}, {self.city}, {self.street}, {self.building}'
+
+    def __str__(self):
+        return self.full()
 
 
 class ActualAddress(Address):
