@@ -52,6 +52,9 @@ class Contact(models.Model):
     def fullname(self):
         return f'{self.surname} {self.name} {self.patronymic}'
 
+    class Meta:
+        abstract = True
+
 
 class LegalContact(Contact):
     organisation = models.ForeignKey(
@@ -96,6 +99,9 @@ class Address(models.Model):
 
     def __str__(self):
         return self.full()
+
+    class Meta:
+        abstract = True
 
 
 class ActualAddress(Address):
