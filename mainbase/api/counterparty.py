@@ -1,29 +1,13 @@
-from rest_framework.generics import (
-    ListCreateAPIView,
-    RetrieveUpdateDestroyAPIView
-)
-
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import AllowAny
 
 from mainbase.models import Counterparty
-
-from mainbase.serializers import (
-    CounterpartyDetailSerializer,
-    CounterpartyListSerializer
-)
+from mainbase.serializers import CounterpartySerializer
 
 
-class CounterpartyListAPI(ListCreateAPIView):
+class CounterpartyAPI(ModelViewSet):
     queryset = Counterparty.objects.all()
-    serializer_class = CounterpartyListSerializer
-    permission_classes = [
-        AllowAny
-    ]
-
-
-class CounterpartyRetrieveAPI(RetrieveUpdateDestroyAPIView):
-    queryset = Counterparty.objects.all()
-    serializer_class = CounterpartyDetailSerializer
+    serializer_class = CounterpartySerializer
     permission_classes = [
         AllowAny
     ]

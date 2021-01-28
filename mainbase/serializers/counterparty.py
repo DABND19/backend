@@ -4,6 +4,13 @@ from mainbase.models import Counterparty
 from .actualaddress import ActualAddressViewSerializer
 from .legalcontact import LegalContactViewSerializer
 
+
+class CounterpartySerializer(ModelSerializer):
+    class Meta:
+        model = Counterparty
+        fields = '__all__'
+
+
 class CounterpartyListSerializer(ModelSerializer):
     class Meta:
         model = Counterparty

@@ -1,4 +1,5 @@
 from .counterparty import (
+    CounterpartySerializer,
     CounterpartyListSerializer,
     CounterpartyDetailSerializer
 )

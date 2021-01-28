@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 api_urls = [
-    path('main/', include('mainbase.urls'))
+    path('main/', include('mainbase.urls')),
+    path('dosimetria/', include('dosimetricbase.urls'))
 ]
 
 urlpatterns = [

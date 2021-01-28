@@ -1,12 +1,3 @@
-from .counterparty import (
-    CounterpartyListAPI,
-    CounterpartyRetrieveAPI
-)
-
-from .legalcontact import (
-    LegalContactAPI
-)
-
-from .actualaddress import (
-    ActualAddressAPI
-)
+from .counterparty import CounterpartyAPI
+from .legalcontact import LegalContactAPI
+from .actualaddress import ActualAddressAPI
