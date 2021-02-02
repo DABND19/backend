@@ -18,17 +18,9 @@ router.register('legal-contact', LegalContactAPI)
 router.register('actual-address', ActualAddressAPI)
 router.register('counterparty', CounterpartyAPI)
 
-list_urls = [
-    path('counterparty/', CounterpartyListView.as_view()),
-]
-
-detail_urls = [
-    path('counterparty/<int:pk>/', CounterpartyDetailView.as_view()),
-]
-
 urlpatterns = [
-    path('list/', include(list_urls)),
-    path('detail/', include(detail_urls)),
+    path('counterparty/list/', CounterpartyListView.as_view()),
+    path('counterparty/detail/<int:pk>/', CounterpartyDetailView.as_view()),
 ]
 
 

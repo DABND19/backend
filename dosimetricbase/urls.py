@@ -31,9 +31,7 @@ router.register('quarter', QuarterAPI)
 router.register('transmitted-document', TransmittedDocumentAPI)
 
 list_urls = [
-    path('client/', ClientListView.as_view()),
-    path('contract/', ContractListView.as_view()),
-    path('invoice/', InvoiceListView.as_view()),
+    
 ]
 
 detail_urls = [
@@ -41,8 +39,10 @@ detail_urls = [
 ]
 
 urlpatterns = [
-    path('list/', include(list_urls)),
-    path('detail/', include(detail_urls)),
+    path('client/list/', ClientListView.as_view()),
+    path('contract/list/', ContractListView.as_view()),
+    path('invoice/list/', InvoiceListView.as_view()),
+    path('client/detail/<int:pk>/', ClientDetailView.as_view()),
 ]
 
 
