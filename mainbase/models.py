@@ -50,7 +50,11 @@ class Contact(models.Model):
     )
 
     def fullname(self):
-        return f'{self.surname} {self.name} {self.patronymic}'
+        return ' '.join([
+            self.surname, 
+            self.name, 
+            self.patronymic
+        ])
 
     class Meta:
         abstract = True
